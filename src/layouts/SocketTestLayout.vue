@@ -3,17 +3,19 @@
 
     <!-- (Optional) The Header -->
     <q-layout-header>
-      <q-toolbar>
-        <q-btn
+      <q-toolbar
+        color="primary"
+        :glossy="$q.theme === 'mat'"
+        :inverted="$q.theme === 'ios'">
+        <!-- <q-btn
           flat
           round
           dense
           icon="menu"
           @click="leftDrawer = !leftDrawer"
-        />
+        /> -->
         <q-toolbar-title>
-          Header
-          <span slot="subtitle">Subtile</span>
+          Socket 调试工具
         </q-toolbar-title>
       </q-toolbar>
       <q-tabs>
