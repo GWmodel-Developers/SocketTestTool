@@ -6,7 +6,8 @@ module.exports = function (ctx) {
     plugins: [
     ],
     css: [
-      'app.styl'
+      'app.styl',
+      'flex.css'
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
@@ -57,7 +58,10 @@ module.exports = function (ctx) {
         'QField',
         'QSelect',
         'QInput',
-        'QToggle'
+        'QToggle',
+        'QScrollArea',
+        'QRadio',
+        'QChip'
       ],
       directives: [
         'Ripple'
