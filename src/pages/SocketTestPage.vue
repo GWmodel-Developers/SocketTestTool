@@ -1,13 +1,19 @@
 <template>
   <q-page class="row">
     <!-- content -->
-    <div class="flex-col group" style="width: 360px;">
-      <div><socket-setting></socket-setting></div>
-      <div><receive-setting></receive-setting></div>
-      <div><send-setting></send-setting></div>
-    </div>
-    <socket-message-grid></socket-message-grid>
-    <div class="flex-item-1" style="min-width: 360px;"><div>receive history</div></div>
+    <q-scroll-area style="width: 360px;">
+      <div class="flex-col group" >
+        <div><socket-setting></socket-setting></div>
+        <div><receive-setting></receive-setting></div>
+        <div><send-setting></send-setting></div>
+      </div>
+    </q-scroll-area>
+    <q-scroll-area class="col">
+      <socket-message-grid></socket-message-grid>
+    </q-scroll-area>
+    <q-scroll-area class="flex-item-1" style="min-width: 360px;">
+      
+    </q-scroll-area>
   </q-page>
 </template>
 

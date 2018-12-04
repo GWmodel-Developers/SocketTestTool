@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card class="q-ma-sm">
     <q-card-title>
       <q-chip class="q-mr-sm" small color="primary">{{ index }}</q-chip>
       <span>{{ title }}</span>
@@ -31,7 +31,7 @@ export default {
     return {}
   },
   computed: {
-    typeLabel: () => {
+    typeLabel: function () {
       let typeDict = {
         "HEX": "十六进制",
         "TEXT": "文本"

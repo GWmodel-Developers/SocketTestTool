@@ -3,7 +3,7 @@
     <div class="flex-item-fill flex-col">
       <div class="row">
         <div class="col-4" v-for="(msg, i) in msgs" :key="`msg-${i}`">
-          <socket-message :index="i" :title="msg.title" :type="msg.type" :content="msg.content"></socket-message>
+          <socket-message :index="i + 1" :title="msg.title" :type="msg.type" :content="msg.content"></socket-message>
         </div>
       </div>  
     </div>
@@ -19,11 +19,11 @@ export default {
   },
   data () {
     return {
-      msgs: [{
+      msgs: (new Array(10)).fill({
         title: "手动报警按钮消除",
         content: "68 2E 2E 68 6f 00 00 00 00 29 87 01 01 30 01 00 08 55 2A 01 01 00 01 38 A6 00 01 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 BC 16",
         type: "HEX"
-      }]
+      })
     }
   }
 }
