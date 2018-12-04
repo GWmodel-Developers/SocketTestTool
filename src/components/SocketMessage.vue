@@ -11,9 +11,9 @@
     </q-card-main>
     <q-card-separator></q-card-separator>
     <q-card-actions>
-      <q-btn color="secondary" icon-right="file_copy" label="复制"></q-btn>
-      <q-btn color="secondary" icon-right="settings" label="触发设置"></q-btn>
-      <q-btn color="primary" icon-right="send" label="发送"></q-btn>
+      <q-btn size="sm" color="primary" flat round icon="file_copy"></q-btn>
+      <q-btn size="sm" color="secondary" icon-right="settings" label="触发"></q-btn>
+      <q-btn size="sm" color="primary" icon-right="send" label="发送"></q-btn>
     </q-card-actions>
   </q-card>
 </template>
