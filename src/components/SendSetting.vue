@@ -14,7 +14,7 @@
       </q-field>
     </q-card-main>
     <q-card-actions>
-      <q-btn icon-right="add" label="添加" color="primary"></q-btn>
+      <q-btn icon-right="add" label="添加" color="secondary"></q-btn>
       <q-btn icon-right="send" label="发送" color="primary"></q-btn>
     </q-card-actions>
   </q-card>
