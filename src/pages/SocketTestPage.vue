@@ -11,9 +11,9 @@
     <q-scroll-area class="col">
       <socket-message-grid></socket-message-grid>
     </q-scroll-area>
-    <q-scroll-area class="flex-item-1" style="min-width: 360px;">
-      
-    </q-scroll-area>
+    <div class="flex-row" style="width: 360px;">
+      <socket-history class="flex-item-fill"></socket-history>
+    </div>
   </q-page>
 </template>
 
@@ -22,13 +22,15 @@ import SocketSetting from "../components/SocketSetting.vue";
 import ReceiveSetting from "../components/ReceiveSetting.vue";
 import SendSetting from "../components/SendSetting.vue";
 import SocketMessageGrid from "../components/SocketMessageGrid.vue";
+import SocketHistory from "../components/History.vue";
 export default {
   // name: 'PageName',
   components: {
     "socket-setting": SocketSetting,
     "receive-setting": ReceiveSetting,
     "send-setting": SendSetting,
-    "socket-message-grid": SocketMessageGrid
+    "socket-message-grid": SocketMessageGrid,
+    "socket-history": SocketHistory
   }
 }
 </script>
