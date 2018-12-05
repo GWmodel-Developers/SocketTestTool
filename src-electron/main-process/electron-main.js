@@ -74,9 +74,9 @@ ipcMain.on(electronMsg.OPEN_SOCKET, function (event,
       default:
         break;
     }
-    return true;
+    event.returnValue = true;
   } catch (error) {
-    
+    event.returnValue = false;
   }
 });
 

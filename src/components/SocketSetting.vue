@@ -54,13 +54,22 @@ export default {
   },
   methods: {
     connect () {
-      ipcRenderer.send(electronMsg.OPEN_SOCKET, {
+      let res = ipcRenderer.sendSync(electronMsg.OPEN_SOCKET, {
         mode: this.socketSetting.mode,
         localPort: parseInt(this.socketSetting.localPort),
         remoteAddress: this.socketSetting.remoteAddress,
         remotePort: parseInt(this.socketSetting.remotePort),
         autoReconnect: this.socketSetting.autoReconnect
       });
+      if (res) {
+        this.isOpen = true;
+      } else {
+        this.$q.notify({
+          type: "negative",
+          detail: "打开 Socket 失败",
+          position: "top"
+        });
+      }
     }
   }
 }
