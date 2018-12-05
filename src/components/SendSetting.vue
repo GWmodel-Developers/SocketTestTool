@@ -3,14 +3,14 @@
     <q-card-title>消息设置</q-card-title>
     <q-card-main>
       <q-field label="名称">
-        <q-input></q-input>
+        <q-input v-model="msg.title"></q-input>
       </q-field>
       <q-field label="类型">
-        <q-radio label="十六进制" value="HEX"></q-radio>
-        <q-radio label="文本" value="TEXT"></q-radio>
+        <q-radio v-model="msg.type" label="文本" val="TEXT"></q-radio>
+        <q-radio v-model="msg.type" label="十六进制" val="HEX"></q-radio>
       </q-field>
       <q-field label="内容" orientation="vertical">
-        <q-input type="textarea"></q-input>
+        <q-input type="textarea" v-model="msg.content"></q-input>
       </q-field>
     </q-card-main>
     <q-card-actions>
@@ -27,7 +27,7 @@ export default {
     return {
       msg: {
         title: "",
-        type: "Text",
+        type: "TEXT",
         content: ""
       }
     }

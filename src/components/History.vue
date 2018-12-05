@@ -1,11 +1,14 @@
 <template>
   <q-scroll-area>
-    <div class="q-ma-md">
-      <q-chat-message v-for="i in 100" :key="`history-item-${i}`" size="11"
+    <div class="q-ma-md" v-if="history.length > 0">
+      <q-chat-message v-for="(item, i) in history" :key="`history-item-${i}`" size="11"
         :sent="i % 2 === 0"
-        :text="['68 09 09 68 02 00 00 00 00 29 8C 01 00 B8 16']"
-        :stamp="`${i} minutes ago`"
+        :text="item.content"
+        :stamp="item.time"
       />
+    </div>
+    <div v-else>
+      <q-alert type="info">历史记录为空</q-alert>
     </div>
   </q-scroll-area>
 </template>
@@ -14,7 +17,9 @@
 export default {
   // name: 'ComponentName',
   data () {
-    return {}
+    return {
+      history: []
+    }
   }
 }
 </script>

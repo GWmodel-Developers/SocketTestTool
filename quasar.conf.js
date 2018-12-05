@@ -64,7 +64,8 @@ module.exports = function (ctx) {
         'QScrollArea',
         'QRadio',
         'QChip',
-        'QChatMessage'
+        'QChatMessage',
+        'QAlert'
       ],
       directives: [
         'Ripple'
