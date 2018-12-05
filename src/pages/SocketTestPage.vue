@@ -1,7 +1,7 @@
 <template>
   <q-page class="row">
     <!-- content -->
-    <q-scroll-area class="col-xl-2 col-lg-4 col-md-3" style="max-width: 320px;min-width: 240px;">
+    <q-scroll-area class="col-xl-3 col-lg-4 col-md-4" style="max-width: 320px;">
       <div class="flex-col q-ma-sm">
         <div class="group"><socket-setting></socket-setting></div>
         <div class="group"><receive-setting></receive-setting></div>
@@ -11,7 +11,7 @@
     <q-scroll-area class="col">
       <socket-message-grid></socket-message-grid>
     </q-scroll-area>
-    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 flex-row group">
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 flex-row group">
       <socket-history class="flex-item-fill"></socket-history>
     </div>
   </q-page>

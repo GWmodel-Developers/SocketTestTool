@@ -18,6 +18,10 @@
         <q-toggle v-model="autoReconnect" :label="autoReconnect ? '是' : '否'"></q-toggle>
       </q-field>
     </q-card-main>
+    <q-card-actions>
+      <q-btn v-if="!isOpen" icon-right="cast" label="连接" color="primary"></q-btn>
+      <q-btn v-else icon-right="close" label="关闭" color="secondary"></q-btn>
+    </q-card-actions>
   </q-card>
 </template>
 
@@ -37,7 +41,8 @@ export default {
         label: "TCP服务器",
         value: "TCP_UDP"
       }],
-      autoReconnect: false
+      autoReconnect: false,
+      isOpen: false
     }
   }
 }
