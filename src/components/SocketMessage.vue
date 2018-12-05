@@ -23,13 +23,15 @@
       </q-btn-group>
       <q-btn-group flat>
         <q-btn size="sm" color="primary" flat icon="file_copy"></q-btn>
-        <q-btn size="sm" color="primary" flat icon-right="send" label="发送"></q-btn>
+        <q-btn size="sm" color="primary" flat icon-right="send" label="发送" @click="sendMsg"></q-btn>
       </q-btn-group>
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
+import { ipcRenderer } from 'electron';
+import electronMsg from "../../common/electronMsg";
 export default {
   // name: 'ComponentName',
   props: {
@@ -48,6 +50,14 @@ export default {
         "TEXT": "文本"
       };
       return typeDict[this.type]
+    }
+  },
+  methods: {
+    sendMsg () {
+      ipcRenderer.send(electronMsg.SEND_MESSAGE, {
+        content: this.content,
+        type: this.type
+      });
     }
   }
 }
