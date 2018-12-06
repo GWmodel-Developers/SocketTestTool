@@ -85,16 +85,23 @@ ipcMain.on(electronMsg.OPEN_SOCKET, function (event,
  * @param {number} port 端口
  */
 function openTcpServer(port) {
-  socket = new createServer((socket) => {
-    clientList.push(socket);
+  socket = new createServer((client) => {
+    console.log("CONNECTED", client.remoteAddress, client.remotePort, clientList.length + 1);
+    clientList.push(client);
 
-    socket.on("close", function () {
-      console.log('CLOSED: ' + socket.remoteAddress + ' ' + socket.remotePort);
+    client.on("close", function () {
+      console.log('CLOSED: ', this.remoteAddress, this.remotePort);
+      clientList.splice(clientList.indexOf(this), 1);
     });
 
-    socket.on("error", function () {
-      console.log("ERRORED: " + socket.remoteAddress + ' ' + socket.remotePort);
+    client.on("error", function (err) {
+      console.log("ERRORED: ", this.remoteAddress, this.remotePort, err);
+      this.end();
     });
+
+    client.on("end", function () {
+      clientList.splice(clientList.indexOf(this), 1);
+    })
   }).listen(port);
 
   socket.on("error", function (err) {
@@ -114,7 +121,23 @@ ipcMain.on(electronMsg.SEND_MESSAGE, function (event, {content, type}) {
     msg = contentArray;
   }
   let buffer = Buffer.from(msg);
-  clientList.forEach(client => {
-    client.write(buffer);
+  clientList.forEach((client) => {
+    if (client.writable) {
+      client.write(buffer);
+    } else {
+      let i = clientList.indexOf(item);
+      client.destroy();
+      clientList.splice(i, 1);
+      console.log("Client list", clientList.length, clientList.map(item => `${item.remoteAddress} : ${item.remotePort}`));
+    }
   });
+});
+
+ipcMain.on(electronMsg.CLOSE_SOCKET, function (event) {
+  try {
+    socket.close();
+    event.returnValue = true;
+  } catch (error) {
+    event.returnValue = false;
+  }
 })

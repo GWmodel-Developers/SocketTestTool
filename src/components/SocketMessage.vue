@@ -5,7 +5,7 @@
         <q-chip square tag class="q-mr-sm" color="primary">{{ index }}</q-chip>
       </q-item-side>
       <q-item-main>
-        <q-item-tile label>{{ title }}</q-item-tile>
+        <q-item-tile label class="text-bold">{{ title }}</q-item-tile>
         <q-item-tile sublabel>{{ typeLabel }}</q-item-tile>
       </q-item-main>
       <q-item-side right tag>

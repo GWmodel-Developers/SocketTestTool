@@ -9,18 +9,18 @@
         <q-input v-model="socketSetting.localPort" type="number"></q-input>
       </q-field>
       <q-field label="远程地址">
-        <q-input v-model="socketSetting.remoteAddress" type="number"></q-input>
+        <q-input :disabled="disableRemoteSetting" v-model="socketSetting.remoteAddress" type="text"></q-input>
       </q-field>
       <q-field label="远程端口">
-        <q-input v-model="socketSetting.remotePort" type="number"></q-input>
+        <q-input :disabled="disableRemoteSetting" v-model="socketSetting.remotePort" type="number"></q-input>
       </q-field>
       <q-field label="自动重连">
-        <q-toggle v-model="socketSetting.autoReconnect" :label="socketSetting.autoReconnect ? '是' : '否'"></q-toggle>
+        <q-toggle :disabled="disableRemoteSetting" v-model="socketSetting.autoReconnect" :label="socketSetting.autoReconnect ? '是' : '否'"></q-toggle>
       </q-field>
     </q-card-main>
     <q-card-actions>
-      <q-btn v-if="!isOpen" icon-right="cast" label="连接" color="primary" @click.native="connect"></q-btn>
-      <q-btn v-else icon-right="close" label="关闭" color="secondary"></q-btn>
+      <q-btn v-if="!isOpen" icon-right="cast" label="连接" color="primary" @click="connect"></q-btn>
+      <q-btn v-else icon-right="close" label="关闭" color="secondary" @click="close"></q-btn>
     </q-card-actions>
   </q-card>
 </template>
@@ -34,9 +34,9 @@ export default {
     return {
       socketSetting: {
         mode: "TCP_SERVER",
-        localPort: "65535",
+        localPort: "",
         remoteAddress: "127.0.0.1",
-        remotePort: "65535",
+        remotePort: "",
         autoReconnect: false
       },
       selectOptions: [{
@@ -50,6 +50,11 @@ export default {
         value: "TCP_UDP"
       }],
       isOpen: false
+    }
+  },
+  computed: {
+    disableRemoteSetting: function () {
+      return socketSetting.mode !== "TCP_CLIENT"
     }
   },
   methods: {
@@ -69,6 +74,12 @@ export default {
           detail: "打开 Socket 失败",
           position: "top"
         });
+      }
+    },
+    close () {
+      let response = ipcRenderer.sendSync(electronMsg.CLOSE_SOCKET);
+      if (response) {
+        this.isOpen = false;
       }
     }
   }
