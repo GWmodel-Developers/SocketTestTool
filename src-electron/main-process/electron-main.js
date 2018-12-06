@@ -61,7 +61,6 @@ ipcMain.on(electronMsg.OPEN_SOCKET, function (event,
     remotePort
   }
 ) {
-  console.log(electronMsg.OPEN_SOCKET);
   if (socket) {
     socket.close();
   }
@@ -107,6 +106,12 @@ function openTcpServer(port) {
   socket.on("error", function (err) {
     console.log("TCP Server Error: ", err);
   });
+
+  socket.on("close", function () {
+    console.log("TCP Server Closed.");
+  })
+
+  console.log("TCP Server Opened.")
 }
 
 ipcMain.on(electronMsg.SEND_MESSAGE, function (event, {content, type}) {

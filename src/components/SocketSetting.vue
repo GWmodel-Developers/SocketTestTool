@@ -9,13 +9,13 @@
         <q-input v-model="socketSetting.localPort" type="number"></q-input>
       </q-field>
       <q-field label="远程地址">
-        <q-input :disabled="disableRemoteSetting" v-model="socketSetting.remoteAddress" type="text"></q-input>
+        <q-input :disable="disableRemoteSetting" v-model="socketSetting.remoteAddress" type="text"></q-input>
       </q-field>
       <q-field label="远程端口">
-        <q-input :disabled="disableRemoteSetting" v-model="socketSetting.remotePort" type="number"></q-input>
+        <q-input :disable="disableRemoteSetting" v-model="socketSetting.remotePort" type="number"></q-input>
       </q-field>
       <q-field label="自动重连">
-        <q-toggle :disabled="disableRemoteSetting" v-model="socketSetting.autoReconnect" :label="socketSetting.autoReconnect ? '是' : '否'"></q-toggle>
+        <q-toggle :disable="disableRemoteSetting" v-model="socketSetting.autoReconnect" :label="socketSetting.autoReconnect ? '是' : '否'"></q-toggle>
       </q-field>
     </q-card-main>
     <q-card-actions>
@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     disableRemoteSetting: function () {
-      return socketSetting.mode !== "TCP_CLIENT"
+      return this.socketSetting.mode !== "TCP_CLIENT"
     }
   },
   methods: {
