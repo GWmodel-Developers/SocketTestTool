@@ -19,12 +19,12 @@
     <q-card-separator></q-card-separator>
     <q-card-actions class="row justify-between">
       <q-btn-group flat>
-        <q-btn size="sm" color="secondary" flat icon="settings" label="触发"></q-btn>
+        <q-btn size="sm" color="secondary" flat icon="settings"></q-btn>
       </q-btn-group>
       <q-btn-group flat>
         <q-btn size="sm" color="primary" flat icon="delete" @click="delChip"></q-btn>
         <q-btn size="sm" color="primary" flat icon="file_copy"></q-btn>
-        <q-btn size="sm" color="primary" flat icon-right="send" label="发送" @click="sendMsg"></q-btn>
+        <q-btn size="sm" color="primary" flat icon="send" @click="sendMsg"></q-btn>
       </q-btn-group>
     </q-card-actions>
   </q-card>
