@@ -16,7 +16,7 @@
           Socket 调试工具
         </q-toolbar-title>
       </q-toolbar>
-      <q-tabs>
+      <!-- <q-tabs>
         <q-route-tab
           slot="title"
           icon="map"
@@ -31,7 +31,7 @@
           replace
           label="Other Tab"
         />
-      </q-tabs>
+      </q-tabs> -->
     </q-layout-header>
 
     <q-page-container>

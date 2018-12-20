@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     addChip () {
-      this.$store.commit("addChip", {...this.msg});
+      this.$store.dispatch("addChip", {...this.msg});
     },
     sendMessage () {
       ipcRenderer.send(electronMsg.SEND_MESSAGE, {

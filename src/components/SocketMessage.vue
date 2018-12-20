@@ -61,11 +61,7 @@ export default {
       });
     },
     delChip () {
-      this.$store.commit("delChip", {
-        title: this.title,
-        type: this.type,
-        content: this.content
-      });
+      this.$store.dispatch("delChip", this.index - 1);
     }
   }
 }
