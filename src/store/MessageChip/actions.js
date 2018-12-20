@@ -19,6 +19,11 @@ export function delChip (context, chip) {
     context.dispatch("saveToDisk");
 }
 
+export function updateChip(context, chip) {
+    context.commit("updateChip", chip);
+    context.dispatch("saveToDisk");
+}
+
 export function saveToDisk(context) {
     fs.writeFile(chipListJsonPath, JSON.stringify(context.state.chipList), function (err) {
         if (err) console.error("写入文件失败：", err);

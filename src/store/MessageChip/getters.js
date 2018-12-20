@@ -1,4 +1,5 @@
-/*
-export function someGetter (state) {
+export function getChipAt (state) {
+    return function (index) {
+        return state.chipList[index];
+    }
 }
-*/

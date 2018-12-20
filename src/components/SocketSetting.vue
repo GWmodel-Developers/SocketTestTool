@@ -27,7 +27,7 @@
 
 <script>
 import { ipcRenderer, remote } from "electron";
-import electronMsg from "../../common/electronMsg";
+import electronMsg from "../../common/ElectronMsg";
 export default {
   // name: 'ComponentName',
   data () {

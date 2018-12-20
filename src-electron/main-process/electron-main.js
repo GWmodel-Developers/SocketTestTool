@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain, net } from 'electron'
-import electronMsg from "../../common/electronMsg";
+import electronMsg from "../../common/ElectronMsg";
 import { Server, createServer, Socket } from 'net';
 
 /**

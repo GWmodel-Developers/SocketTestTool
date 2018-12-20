@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import electronMsg from "../../common/ElectronMsg";
 export default {
   // name: 'ComponentName',
   data () {
