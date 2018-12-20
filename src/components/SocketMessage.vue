@@ -22,6 +22,7 @@
         <q-btn size="sm" color="secondary" flat icon="settings" label="触发"></q-btn>
       </q-btn-group>
       <q-btn-group flat>
+        <q-btn size="sm" color="primary" flat icon="delete" @click="delChip"></q-btn>
         <q-btn size="sm" color="primary" flat icon="file_copy"></q-btn>
         <q-btn size="sm" color="primary" flat icon-right="send" label="发送" @click="sendMsg"></q-btn>
       </q-btn-group>
@@ -57,6 +58,13 @@ export default {
       ipcRenderer.send(electronMsg.SEND_MESSAGE, {
         content: this.content,
         type: this.type
+      });
+    },
+    delChip () {
+      this.$store.commit("delChip", {
+        title: this.title,
+        type: this.type,
+        content: this.content
       });
     }
   }
