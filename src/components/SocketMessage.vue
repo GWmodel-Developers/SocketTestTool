@@ -177,7 +177,7 @@ export default {
     saveReceiveTriggerParams () {
       this.updateChip();
     },
-    onReceiveMessage (message) {
+    onReceiveMessage (event, message) {
       if (trigger.type === triggerType.RECEIVE) {
         let realMsg;
         if (this.trigger.type === "HEX") {
@@ -202,6 +202,7 @@ export default {
     this.$watch("trigger.type", this.onTriggerChanged);
     let chip = this.$store.getters.getChipAt(this.index - 1);
     this.setChip(chip);
+    ipcRenderer.on(electronMsg.RECEIVE_MSG, onReceiveMessage)
   }
 }
 </script>
