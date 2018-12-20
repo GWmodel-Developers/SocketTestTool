@@ -9,7 +9,9 @@
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fs-extra": "^7.0.1"
+  },
   "devDependencies": {
     "devtron": "1.4.0",
     "electron": "3.0.8",

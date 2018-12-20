@@ -28,6 +28,9 @@ export default {
     msgs () {
       return this.$store.state.messageChipModule.chipList;
     }
+  },
+  mounted () {
+    this.$store.dispatch("readFromDisk");
   }
 }
 </script>
