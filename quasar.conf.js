@@ -6,7 +6,8 @@ module.exports = function (ctx) {
     plugins: [
     ],
     css: [
-      'app.styl'
+      'app.styl',
+      'flex.css'
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
@@ -42,12 +43,30 @@ module.exports = function (ctx) {
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
+        'QBtnGroup',
         'QIcon',
         'QList',
         'QListHeader',
         'QItem',
         'QItemMain',
-        'QItemSide'
+        'QItemSide',
+        'QItemTile',
+        'QCard',
+        'QCardTitle',
+        'QCardMain',
+        'QCardMedia',
+        'QCardSeparator',
+        'QCardActions',
+        'QField',
+        'QSelect',
+        'QInput',
+        'QToggle',
+        'QScrollArea',
+        'QRadio',
+        'QChip',
+        'QChatMessage',
+        'QAlert',
+        'QPopover'
       ],
       directives: [
         'Ripple'
