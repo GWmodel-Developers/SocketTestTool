@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, net } from 'electron'
+import { app, BrowserWindow, ipcMain, net, ipcRenderer } from 'electron'
 import electronMsg from "../../common/ElectronMsg";
 import { Server, createServer, Socket } from 'net';
 
@@ -100,6 +100,12 @@ function openTcpServer(port) {
 
     client.on("end", function () {
       clientList.splice(clientList.indexOf(this), 1);
+    });
+
+    client.on("data", function (data) {
+      if (mainWindow && mainWindow.webContents) {
+        mainWindow.webContents.send(electronMsg.RECEIVE_SOCKET, data);
+      }
     })
   }).listen(port);
 

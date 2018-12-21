@@ -25,7 +25,7 @@ export function updateChip(context, chip) {
 }
 
 export function saveToDisk(context) {
-    fs.writeFile(chipListJsonPath, JSON.stringify(context.state.chipList), function (err) {
+    fs.writeFile(chipListJsonPath, JSON.stringify(context.state.chipList, undefined, 4), function (err) {
         if (err) console.error("写入文件失败：", err);
         else console.log("写入文件成功");
     });

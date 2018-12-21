@@ -141,18 +141,20 @@ export default {
       this.title = chip.title;
       this.type = chip.type;
       this.content = chip.content;
-      this.trigger = chip.trigger;
+      this.trigger = chip.trigger || this.trigger;
+      console.log("set chip", chip, this.title, this.type, this.content, this.trigger);
     },
     updateChip () {
+      let self = this;
       this.$store.dispatch("updateChip", {
         chipIndex: this.index - 1,
         chip: {
           title: this.title,
           type: this.type,
           content: this.content,
-          trigger: {
+          trigger: this.trigger.type === triggerType.NONE ? undefined : {
             type: this.trigger.type,
-            params: this.trigger.type === triggerType.NONE ? {} : this.trigger.params
+            params: this.trigger.params
           }
         }
       });
@@ -162,25 +164,33 @@ export default {
         clearInterval(this.timmer);
       }
       if (trigger === triggerType.RECEIVE) {
-        this.$set(this.trigger.params, "message", this.trigger.params.message || "")
-        this.$set(this.trigger.params, "type", this.trigger.params.type || "TEXT")
+        this.$set(this.trigger.params, "message", this.trigger.params.message || "");
+        this.$set(this.trigger.params, "type", this.trigger.params.type || "TEXT");
+      } else if (trigger === triggerType.TIMEOUT) {
+        this.$set(this.trigger.params, "times", this.trigger.params.times || 1);
+        this.$set(this.trigger.params, "delay", this.trigger.params.delay || 1);
       }
       this.updateChip();
     },
     setTimmer () {
       let params = this.trigger.params;
-      clearInterval(this.timmer);
-      this.timmer = setInterval(() => {
-        this.sendMsg();
-      }, params.delay / params.times * 1000);
+      if (params.delay > 0 && params.times > 0) {
+        clearInterval(this.timmer);
+        this.timmer = setInterval(() => {
+          this.sendMsg();
+        }, params.delay / params.times * 1000);
+      }
+      this.updateChip();
     },
     saveReceiveTriggerParams () {
       this.updateChip();
     },
     onReceiveMessage (event, message) {
-      if (trigger.type === triggerType.RECEIVE) {
+      console.log("receive message")
+      if (this.trigger.type === triggerType.RECEIVE) {
         let realMsg;
-        if (this.trigger.type === "HEX") {
+        let params = this.trigger.params;
+        if (params.type === "HEX") {
           let msgBuffer = new Buffer(message);
           realMsg = msgBuffer.map(item => item.toString(16)).join(" ");
         } else {
@@ -199,10 +209,10 @@ export default {
     }
   },
   mounted () {
-    this.$watch("trigger.type", this.onTriggerChanged);
     let chip = this.$store.getters.getChipAt(this.index - 1);
     this.setChip(chip);
-    ipcRenderer.on(electronMsg.RECEIVE_MSG, onReceiveMessage)
+    this.$watch("trigger.type", this.onTriggerChanged);
+    ipcRenderer.on(electronMsg.RECEIVE_SOCKET, this.onReceiveMessage)
   }
 }
 </script>

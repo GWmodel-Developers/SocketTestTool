@@ -39,16 +39,18 @@ export default {
         remotePort: "",
         autoReconnect: false
       },
-      selectOptions: [{
-        label: "TCP服务器",
-        value: "TCP_SERVER"
-      },{
-        label: "TCP客户端",
-        value: "TCP_CLIENT"
-      },{
-        label: "TCP服务器",
-        value: "TCP_UDP"
-      }],
+      selectOptions: [
+        {
+          label: "TCP服务器",
+          value: "TCP_SERVER"
+        // },{
+        //   label: "TCP客户端",
+        //   value: "TCP_CLIENT"
+        // },{
+        //   label: "TCP服务器",
+        //   value: "TCP_UDP"
+        }
+      ],
       isOpen: false
     }
   },
