@@ -14,13 +14,14 @@
       </q-field>
     </q-card-main>
     <q-card-actions>
-      <q-btn icon-right="add" label="添加" color="secondary"></q-btn>
-      <q-btn icon-right="send" label="发送" color="primary"></q-btn>
+      <q-btn icon-right="add" label="添加" color="secondary" @click="addChip"></q-btn>
+      <q-btn icon-right="send" label="发送" color="primary" @click="sendMessage"></q-btn>
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
+import electronMsg from "../../common/ElectronMsg";
 export default {
   // name: 'ComponentName',
   data () {
@@ -31,6 +32,17 @@ export default {
         content: ""
       }
     }
+  },
+  methods: {
+    addChip () {
+      this.$store.dispatch("addChip", {...this.msg});
+    },
+    sendMessage () {
+      ipcRenderer.send(electronMsg.SEND_MESSAGE, {
+        content: this.msg.content,
+        type: this.msg.type
+      });
+    },
   }
 }
 </script>
