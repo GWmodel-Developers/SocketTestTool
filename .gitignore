@@ -18,4 +18,4 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
-src/statics/chipList.json
+chipList.json
