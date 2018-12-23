@@ -1,7 +1,8 @@
 import * as fs from "fs-extra";
 import * as path from "path";
+import * as os from "os";
 
-let chipListJsonPath = path.join(__statics, "chipList.json");
+let chipListJsonPath = path.join(os.homedir() || process.cwd() || __statics, ".SocketTestTool", "chipList.json");
 
 export function addChip (context, chip) {
     context.commit("addChip", chip);
