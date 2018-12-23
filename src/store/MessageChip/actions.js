@@ -3,6 +3,11 @@ import * as path from "path";
 import * as os from "os";
 
 let chipListJsonPath = path.join(os.homedir() || process.cwd() || __statics, ".SocketTestTool", "chipList.json");
+try {
+    fs.ensureDirSync(path.dirname(chipListJsonPath));
+} catch (error) {
+    console.log("ChipList Path cannot ensure:", chipListJsonPath, error);
+}
 
 export function addChip (context, chip) {
     context.commit("addChip", chip);
