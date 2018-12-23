@@ -127,7 +127,7 @@ module.exports = function (ctx) {
       // id: 'org.cordova.quasar.app'
     },
     electron: {
-      // bundler: 'builder', // or 'packager'
+      bundler: 'builder', // or 'packager'
       extendWebpack (cfg) {
         // do something with Electron process Webpack cfg
       },
