@@ -3,7 +3,7 @@
     <div class="flex-item-fill flex-col" v-if="msgs.length > 0">
       <div class="row">
         <div class="col-xl-4 col-12" v-for="(msg, i) in msgs" :key="`msg-${i}`">
-          <socket-message :index="i + 1"></socket-message>
+          <socket-message :index="i"></socket-message>
         </div>
       </div>  
     </div>
