@@ -2,7 +2,7 @@
   <q-card class="q-ma-sm">
     <q-item>
       <q-item-side>
-        <q-chip square tag class="q-mr-sm" color="primary">{{ index }}</q-chip>
+        <q-chip square tag class="q-mr-sm" color="primary">{{ index + 1 }}</q-chip>
       </q-item-side>
       <q-item-main>
         <q-item-tile label class="text-bold">{{ title }}</q-item-tile>
@@ -100,9 +100,6 @@ export default {
   },
   data () {
     return {
-      title: "",
-      type: "",
-      content: "",
       trigger: {
         type: triggerType.NONE,
         params: {
@@ -124,6 +121,26 @@ export default {
         };
         return typeDict[type]
       }
+    },
+    chip: {
+      get: function () {
+        return this.$store.state.messageChipModule.chipList[this.index];
+      }
+    },
+    title: {
+      get: function () {
+        return this.chip.title;
+      }
+    },
+    type: {
+      get: function () {
+        return this.chip.type;
+      }
+    },
+    content: {
+      get: function () {
+        return this.chip.content;
+      }
     }
   },
   methods: {
@@ -135,19 +152,19 @@ export default {
       });
     },
     delChip () {
-      this.$store.dispatch("delChip", this.index - 1);
+      this.$store.dispatch("delChip", this.index);
     },
-    setChip (chip) {
-      this.title = chip.title;
-      this.type = chip.type;
-      this.content = chip.content;
-      this.trigger = chip.trigger || this.trigger;
-      console.log("set chip", chip, this.title, this.type, this.content, this.trigger);
-    },
+    // setChip (chip) {
+    //   this.title = chip.title;
+    //   this.type = chip.type;
+    //   this.content = chip.content;
+    //   this.trigger = chip.trigger || this.trigger;
+    //   console.log("set chip", chip, this.title, this.type, this.content, this.trigger);
+    // },
     updateChip () {
       let self = this;
       this.$store.dispatch("updateChip", {
-        chipIndex: this.index - 1,
+        chipIndex: this.index,
         chip: {
           title: this.title,
           type: this.type,
@@ -202,15 +219,15 @@ export default {
       }
     }
   },
-  watch: {
-    index (newIndex) {
-      let chip = this.$store.getters.getChipAt(newIndex - 1);
-      this.setChip(chip)
-    }
-  },
+  // watch: {
+  //   index (newIndex) {
+  //     let chip = this.$store.getters.getChipAt(newIndex - 1);
+  //     this.setChip(chip)
+  //   }
+  // },
   mounted () {
-    let chip = this.$store.getters.getChipAt(this.index - 1);
-    this.setChip(chip);
+    // let chip = this.$store.getters.getChipAt(this.index - 1);
+    // this.setChip(chip);
     this.$watch("trigger.type", this.onTriggerChanged);
     ipcRenderer.on(electronMsg.RECEIVE_SOCKET, this.onReceiveMessage)
   }
