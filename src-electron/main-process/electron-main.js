@@ -115,9 +115,9 @@ function openTcpServer(port) {
 
   socket.on("close", function () {
     console.log("TCP Server Closed.");
-  })
+  });
 
-  console.log("TCP Server Opened.")
+  console.log("TCP Server Opened.");
 }
 
 ipcMain.on(electronMsg.SEND_MESSAGE, function (event, {content, type}) {
@@ -147,6 +147,10 @@ ipcMain.on(electronMsg.SEND_MESSAGE, function (event, {content, type}) {
 ipcMain.on(electronMsg.CLOSE_SOCKET, function (event) {
   try {
     socket.close();
+    clientList.forEach(element => {
+      element.end();
+    });
+    clientList = [];
     event.returnValue = true;
   } catch (error) {
     event.returnValue = false;

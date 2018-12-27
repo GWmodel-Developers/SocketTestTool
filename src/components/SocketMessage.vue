@@ -203,7 +203,6 @@ export default {
       this.updateChip();
     },
     onReceiveMessage (event, message) {
-      console.log("receive message")
       if (this.trigger.type === triggerType.RECEIVE) {
         let realMsg;
         let params = this.trigger.params;
@@ -219,17 +218,21 @@ export default {
       }
     }
   },
-  // watch: {
-  //   index (newIndex) {
-  //     let chip = this.$store.getters.getChipAt(newIndex - 1);
-  //     this.setChip(chip)
-  //   }
-  // },
+  watch: {
+    chip (newChip) {
+      if (newChip.trigger) {
+        this.trigger = newChip.trigger;
+      }
+    }
+  },
   mounted () {
     // let chip = this.$store.getters.getChipAt(this.index - 1);
     // this.setChip(chip);
     this.$watch("trigger.type", this.onTriggerChanged);
-    ipcRenderer.on(electronMsg.RECEIVE_SOCKET, this.onReceiveMessage)
+    ipcRenderer.on(electronMsg.RECEIVE_SOCKET, this.onReceiveMessage);
+    if (this.chip.trigger) {
+      this.trigger = this.chip.trigger
+    }
   }
 }
 </script>
